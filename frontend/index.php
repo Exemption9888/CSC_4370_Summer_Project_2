@@ -52,7 +52,7 @@ require './../backend/database.php';
 					<button type='button' id='shuffle-button'>Shuffle</button>
 				</div>
 				<div id='reset'>
-					<button type='button' id='reset-buttton'>Reset</button>
+					<button type='button' id='reset-button'>Reset</button>
 				</div>
 			</section>
 		</main>

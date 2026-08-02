@@ -19,7 +19,8 @@ body {
     align-items: center;
 }
 
-header {
+header,
+footer {
     width: 100%;
     background-color: var(--bright-accent);
     margin: 20px;
@@ -36,6 +37,8 @@ main {
     padding: 20px;
     border: 2px solid var(--light-accent);
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     place-items: center;
@@ -43,27 +46,17 @@ main {
 
 section {
     width: 480px;
-    background-color: var(--secondary-accent);
+    background-color: var(--secondary-color);
     margin: 20px;
     padding: 20px;
     border: 2px solid var(--light-accent);
     border-radius: 20px;
-}
-
-footer {
-    width: 100%;
-    background-color: var(--bright-accent);
-    margin: 20px;
-    padding: 20px;
-    border: 2px solid var(--light-accent);
-    border-radius: 20px;
-    place-items: center;
 }
 
 #game-board {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 410px;
+    height: 410px;
     border: 5px solid var(--primary-color);
     display: grid;
     grid-template-columns: repeat( 4, 100px );
@@ -71,14 +64,11 @@ footer {
     background-color: var(--light-accent);
 }
 
-#game-metrics {
-    display: flex;
-    justify-content: space-between;
-}
-
+#game-metrics,
 #game-buttons {
     display: flex;
     justify-content: space-between;
+    background-color: var(--bright-accent);
 }
 
 .tile {
@@ -86,22 +76,28 @@ footer {
     height: 100px;
     border: 1px solid var(--secondary-color);
     background-image: url('beach.jpg');
+    background-repeat: no-repeat;
     background-size: 400px 400px;
     cursor: pointer;
 }
 
 .empty {
     background-image: none;
+    cursor: default;
 }
 
-@media ( min-width: 768px ) {
+@media ( max-width: 600px ) {
     body {
-        font-size: 16px;
+        font-size: 12px;
+    }
+    #game-board {
+        transform: scale( 0.8 );
+        transform-origin: top center;
     }
 }
 
-@media ( min-width: 1024px ) {
+@media ( max-width: 1024px ) {
     body {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
