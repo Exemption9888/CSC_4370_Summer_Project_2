@@ -9,6 +9,7 @@ const resetButton = document.getElementById('reset-button');
 const empty = document.querySelector('.empty');
 
 let gameDifficulty = difficulty.value;
+let movesMade = 0;
 
 const allTiles = document.querySelectorAll('.tile');
 allTiles.forEach( tile => {
@@ -26,6 +27,7 @@ for( let i = 0; i < 16; i++ ) {
 
 function moveTile( tile ) {
 	if ( !isValid( tile ) ) { return; }
+	incrementMoves();
 	const placeholder = document.createElement('div');
 	tile.replaceWith(placeholder);
 	empty.replaceWith(tile);
@@ -62,7 +64,10 @@ function isSolved() {
 	return true;
 }
 
-function incrementMoves () {
+function incrementMoves() {
+	movesMade++;
+	console.log(movesMade);
+	moveCounter.textContent = `Moves: ${ movesMade }`;
 }
 
 function resetGame() {
@@ -70,8 +75,9 @@ function resetGame() {
 		const tile = document.getElementById( `tile${ i }` );
 		gameBoard.appendChild( tile );
 	}
-	moveCounter.innerHTML = 'Moves: 0';
-	gameTimer.innerHTML = 'Timer: 0s';
+	moveCounter.textContent = 'Moves: 0';
+	movesMade = 0;
+	gameTimer.textContent = 'Timer: 0s';
 }
 
 function shuffle( n ) {
