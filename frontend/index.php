@@ -2,25 +2,6 @@
 
 require './../backend/database.php';
 
-$message = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $playerName = trim($_POST['name'] ?? '');
-  $playerTime = (int)($_POST['time'] ?? 0);
-  $playerMoves = (int)($_POST['moves'] ?? 0);
-
-  $stmt = $conn->prepare("INSERT INTO PLAYERS (playername, playerTime, playerMoves) VALUES (?, ?, ?)");
-  $stmt->bind_param("ssdsis", $playerName, $playerTime, $playerMoves);
-
-  if ($stmt->execute()) {
-    $message = "<script>console.log('Record saved successfully')</script>";
-  } else {
-    $message = "<script>console.log('Error: ' . $stmt->error)</script>";
-  }
-
-  $stmt->close();
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -76,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			</section>
 			<section id='win-screen' class='hidden'>
 				<h1>You Win!</h1>
-				<form action='playerboard.php' method='post'>
+				<form action='./../backend/submission.php' method='post'>
 					<span id='time-score'>Time: 0s</span>
 					<span id='move-score'>Moves: 0</span><br>
 					<label for='player-name'>Enter your name: </label><br>
 					<input type='text' id='player-name' name='player-name'/><br>
-					<input type='hidden' id='time-submission' name='time' value=''>
-					<input type='hidden' id='move-submission' name='moves' value=''>
-					<button type='button' id='submission-button'>Submit</button>
+					<input type='hidden' id='time-submission' name='player-time' value=''>
+					<input type='hidden' id='move-submission' name='player-moves' value=''>
+					<button type='submit' id='submission-button'>Submit</button>
 				</form>
 			</section>
 		</main>
