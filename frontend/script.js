@@ -120,7 +120,11 @@ function stopTimer() {
 }
 
 function solved() {
-	let a = 0;
+	const timeScore = seconds;
+	const moveScore = movesMade;
+	stopTimer();
+	gameTimer.textContent = `Timer: ${ timeScore }s`;
+	console.log("Solved");
 }
 
 resetButton.addEventListener( 'click', () => {

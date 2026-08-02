@@ -18,9 +18,9 @@ require './../backend/database.php';
 			<div id='game-options'>
 				<label for='difficulty'>Difficulty Level: </label>
 				<select name='difficulty' id='difficulty'>
-					<option value='100'>Easy</option>
-					<option value='200'>Medium</option>
-					<option value='300'>Hard</option>
+					<option value='10'>Easy</option>
+					<option value='25'>Medium</option>
+					<option value='40'>Hard</option>
 				</select>
 			</div>
 		</header>
