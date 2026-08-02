@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: var(--tertiary-accent);
+    background-color: var(--primary-color);
     margin: 20px;
     padding: 20px;
     display: flex;
@@ -31,7 +31,7 @@ header {
 
 main {
     width: 100%;
-    background-color: var(--tertiary-accent);
+    background-color: var(--tertiary-color);
     margin: 20px;
     padding: 20px;
     border: 2px solid var(--light-accent);
@@ -43,7 +43,7 @@ main {
 
 section {
     width: 480px;
-    background-color: var(--tertiary-accent);
+    background-color: var(--secondary-accent);
     margin: 20px;
     padding: 20px;
     border: 2px solid var(--light-accent);
@@ -68,6 +68,7 @@ footer {
     display: grid;
     grid-template-columns: repeat( 4, 100px );
     grid-template-rows: repeat( 4, 100px );
+    background-color: var(--light-accent);
 }
 
 #game-metrics {
