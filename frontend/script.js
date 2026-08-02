@@ -15,7 +15,9 @@ const winScreen = document.getElementById('win-screen');
 const winTime = document.getElementById('time-score');
 const winMoves = document.getElementById('move-score');
 const submissionButton = document.getElementById('submission-button');
-const playerName = document.getElementById('player-name');
+const playerNameInput = document.getElementById('player-name');
+const timeSubmission = document.getElementById('time-submission');
+const moveSubmission = document.getElementById('move-submission');
 
 let gameDifficulty = difficulty.value;
 
@@ -40,7 +42,7 @@ function moveTile( tile ) {
 	tile.replaceWith(placeholder);
 	empty.replaceWith(tile);
 	placeholder.replaceWith(empty);
-	if ( isSolved ) { solved(); }
+	if ( isSolved() ) { solved(); }
 }
 
 function isValid( tile ) {
@@ -82,6 +84,7 @@ function incrementMoves() {
 function resetGame() {
 	gameStart = false;
 	stopTimer();
+	winScreen.classList.remove('fade-in');
 	for( let i = 0; i < 16; i++ ) {
 		const tile = document.getElementById( `tile${ i }` );
 		gameBoard.appendChild( tile );
@@ -93,6 +96,7 @@ function resetGame() {
 
 function shuffle( n ) {
 	gameStart = true;
+	winScreen.classList.remove('fade-in');
 	const tiles = Array.from( gameBoard.children );
 	for ( let i = 0; i < n; i++ ) {
 		const validMoves = [];
@@ -130,7 +134,15 @@ function solved() {
 	const moveScore = movesMade;
 	stopTimer();
 	gameTimer.textContent = `Timer: ${ timeScore }s`;
-	console.log("Solved");
+	showWinScreen();
+}
+
+function showWinScreen() {
+	winTime.textContent = `Time: ${ seconds }s`;
+	timeSubmission.value = seconds;
+	winMoves.textContent = `Moves: ${ movesMade }`;
+	moveSubmission.value = movesMade;
+	winScreen.classList.add( 'fade-in' );
 }
 
 resetButton.addEventListener( 'click', () => {

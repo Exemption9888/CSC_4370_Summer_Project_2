@@ -15,14 +15,15 @@ else {
     echo "<script>console.log('Connection established')</script>";
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS PLAYERS(
+$sql = "
+	CREATE TABLE IF NOT EXISTS players(
 	id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	username VARCHAR(30) NOT NULL,
-	score INT(4) UNSIGNED NOT NULL,
-	clock INT(4) UNSIGNED NOT NULL)";
+	playerName VARCHAR(30) NOT NULL,
+	playerTime INT(4) UNSIGNED NOT NULL,
+	playerMoves INT(4) UNSIGNED NOT NULL)";
 
 if ($conn->query($sql) === TRUE) {
-	echo "<script>console.log('Table PLAYERS created successfully')</script>";
+	echo "<script>console.log('Table players created successfully')</script>";
 }
 else {
 	echo "Error creating table: " . $conn->error;

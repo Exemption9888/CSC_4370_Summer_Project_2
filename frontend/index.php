@@ -2,6 +2,25 @@
 
 require './../backend/database.php';
 
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $playerName = trim($_POST['name'] ?? '');
+  $playerTime = (int)($_POST['time'] ?? 0);
+  $playerMoves = (int)($_POST['moves'] ?? 0);
+
+  $stmt = $conn->prepare("INSERT INTO PLAYERS (playername, playerTime, playerMoves) VALUES (?, ?, ?)");
+  $stmt->bind_param("ssdsis", $playerName, $playerTime, $playerMoves);
+
+  if ($stmt->execute()) {
+    $message = "<script>console.log('Record saved successfully')</script>";
+  } else {
+    $message = "<script>console.log('Error: ' . $stmt->error)</script>";
+  }
+
+  $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +37,7 @@ require './../backend/database.php';
 			<div id='game-options'>
 				<label for='difficulty'>Difficulty Level: </label>
 				<select name='difficulty' id='difficulty'>
-					<option value='10'>Easy</option>
+					<option value='1'>Easy</option>
 					<option value='25'>Medium</option>
 					<option value='40'>Hard</option>
 				</select>
@@ -57,17 +76,19 @@ require './../backend/database.php';
 			</section>
 			<section id='win-screen' class='hidden'>
 				<h1>You Win!</h1>
-				<span id='time-score'>Time: 0s</span>
-				<span id='move-score'>Moves: 0</span><br>
 				<form action='playerboard.php' method='post'>
+					<span id='time-score'>Time: 0s</span>
+					<span id='move-score'>Moves: 0</span><br>
 					<label for='player-name'>Enter your name: </label><br>
 					<input type='text' id='player-name' name='player-name'/><br>
+					<input type='hidden' id='time-submission' name='time' value=''>
+					<input type='hidden' id='move-submission' name='moves' value=''>
 					<button type='button' id='submission-button'>Submit</button>
 				</form>
 			</section>
 		</main>
 		<footer>
-			<h1>Scoreboard</h1>
+			<h1>Can You Solve It?</h1>
 		</footer>
 		<script src='script.js'></script>
 	</body>
