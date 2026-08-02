@@ -70,6 +70,14 @@ require './../backend/database.php';
 		</main>
 		<footer>
 			<h1>Leaderboard</h1>
+			<table id='leaderboard'>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Time</th>
+					<th>Moves</th>
+				</tr>
+
 <?php
 $stmt = $conn->prepare("
 	SELECT * FROM players
@@ -81,13 +89,36 @@ else {
 	echo "<script>console.log('Error: " . $stmt->error . "')</script>";
 }
 $result = $stmt->get_result();
-while ( $player = $result->fetch_assoc() ) {
-	print_r( $player );
-	echo "<br>";
-}
+$playersArray = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 $conn->close();
 ?>
+
+				<script>
+					const leaderboard = document.getElementById('leaderboard');
+					const players = <?php echo json_encode($playersArray); ?>;
+					players.forEach( ( player ) => {
+						const boardRow = document.createElement('tr');
+
+						const boardID = document.createElement('td');
+						const boardName = document.createElement('td');
+						const boardTime = document.createElement('td');
+						const boardMoves = document.createElement('td');
+
+						boardID.textContent = player.id;
+						boardName.textContent = player.playerName;
+						boardTime.textContent = player.playerTime;
+						boardMoves.textContent = player.playerMoves;
+
+						boardRow.appendChild( boardID );
+						boardRow.appendChild( boardName );
+						boardRow.appendChild( boardTime );
+						boardRow.appendChild( boardMoves );
+
+						leaderboard.appendChild( boardRow );
+					})
+				</script>
+			</table>
 		</footer>
 		<script src='script.js'></script>
 	</body>

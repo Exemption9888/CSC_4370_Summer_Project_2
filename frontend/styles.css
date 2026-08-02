@@ -54,6 +54,17 @@ section {
     border-radius: 20px;
 }
 
+table {
+    width: 50%;
+    font-weight: bold;
+    text-align: center;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
 #game-board {
     position: relative;
     width: 410px;
