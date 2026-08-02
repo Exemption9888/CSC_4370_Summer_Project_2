@@ -10,6 +10,8 @@ const empty = document.querySelector('.empty');
 
 let gameDifficulty = difficulty.value;
 let movesMade = 0;
+let timerInterval = null;
+let seconds = 0;
 
 const allTiles = document.querySelectorAll('.tile');
 allTiles.forEach( tile => {
@@ -32,10 +34,11 @@ function moveTile( tile ) {
 	tile.replaceWith(placeholder);
 	empty.replaceWith(tile);
 	placeholder.replaceWith(empty);
-	isSolved();
+	if ( isSolved ) { solved(); }
 }
 
 function isValid( tile ) {
+	if ( !gameStart ) { return false; }
 	if ( tile.classList.contains( 'empty' ) ) { return false; }
 
 	const tiles = Array.from( gameBoard.children );
@@ -71,6 +74,8 @@ function incrementMoves() {
 }
 
 function resetGame() {
+	gameStart = false;
+	stopTimer();
 	for( let i = 0; i < 16; i++ ) {
 		const tile = document.getElementById( `tile${ i }` );
 		gameBoard.appendChild( tile );
@@ -81,6 +86,7 @@ function resetGame() {
 }
 
 function shuffle( n ) {
+	gameStart = true;
 	const tiles = Array.from( gameBoard.children );
 	for ( let i = 0; i < n; i++ ) {
 		const validMoves = [];
@@ -94,7 +100,27 @@ function shuffle( n ) {
 		empty.replaceWith( randomTile );
 		placeholder.replaceWith( empty );
 	}
-	gameStart = true;
+	startTimer();
+}
+
+function startTimer() {
+	stopTimer();
+	seconds = 0;
+	timerInterval = setInterval(() => {
+		seconds++;
+		gameTimer.textContent = `Timer: ${ seconds }s`;
+	}, 1000 );
+}
+
+function stopTimer() {
+	if ( timerInterval !== null ) {
+		clearInterval( timerInterval );
+		timerInterval = null;
+	}
+}
+
+function solved() {
+	let a = 0;
 }
 
 resetButton.addEventListener( 'click', () => {
