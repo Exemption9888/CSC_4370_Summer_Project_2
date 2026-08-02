@@ -69,7 +69,25 @@ require './../backend/database.php';
 			</section>
 		</main>
 		<footer>
-			<h1>Can You Solve It?</h1>
+			<h1>Leaderboard</h1>
+<?php
+$stmt = $conn->prepare("
+	SELECT * FROM players
+");
+if ($stmt->execute()) {
+	echo "<script>console.log('Successly retrieving all entries from players')</script>";
+}
+else {
+	echo "<script>console.log('Error: " . $stmt->error . "')</script>";
+}
+$result = $stmt->get_result();
+while ( $player = $result->fetch_assoc() ) {
+	print_r( $player );
+	echo "<br>";
+}
+$stmt->close();
+$conn->close();
+?>
 		</footer>
 		<script src='script.js'></script>
 	</body>

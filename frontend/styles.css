@@ -28,6 +28,7 @@ footer {
     border: 2px solid var(--light-accent);
     border-radius: 20px;
     place-items: center;
+    text-align: center;
 }
 
 main {
