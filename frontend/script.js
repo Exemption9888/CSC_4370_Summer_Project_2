@@ -91,9 +91,13 @@ function shuffle( n ) {
 	gameStart = true;
 }
 
-resetButton.addEventListener( 'click', resetGame() );
+resetButton.addEventListener( 'click', () => {
+	resetGame();
+})
 
-shuffleButton.addEventListener( 'click', shuffle( gameDifficulty ) );
+shuffleButton.addEventListener( 'click', () => {
+	shuffle( gameDifficulty );
+})
 
 difficulty.addEventListener( 'change', (event) => {
 	gameDifficulty = difficulty.value;
