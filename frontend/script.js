@@ -16,5 +16,5 @@ const tilesById = [];
 for( let i = 0; i < 16; i++ ) {
 	const tileById = document.getElementById( `tile${i}` );
 	tileById.style.backgroundPosition = 
-		`-${100 * i % 4} -${100 * Math.floor( i / 4 ) }`;
+		`-${100 * ( i % 4 ) } -${100 * Math.floor( i / 4 ) }`;
 }
