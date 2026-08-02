@@ -86,13 +86,34 @@ section {
     cursor: default;
 }
 
-@media ( max-width: 600px ) {
+#win-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    text-align: center;
+    z-index: 100;
+}
+
+#win-screen.fade-in {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media ( max-width: 400px ) {
     body {
         font-size: 12px;
     }
     #game-board {
         transform: scale( 0.8 );
         transform-origin: top center;
+        margin: 0px;
+    }
+    section {
+        transform: scale( 0.7 );
+        transform-origin: top center;
+        margin: 0px;
+
     }
 }
 

@@ -55,6 +55,16 @@ require './../backend/database.php';
 					<button type='button' id='reset-button'>Reset</button>
 				</div>
 			</section>
+			<section id='win-screen' class='hidden'>
+				<h1>You Win!</h1>
+				<span id='time-score'>Time: 0s</span>
+				<span id='move-score'>Moves: 0</span><br>
+				<form action='playerboard.php' method='post'>
+					<label for='player-name'>Enter your name: </label><br>
+					<input type='text' id='player-name' name='player-name'/><br>
+					<button type='button' id='submission-button'>Submit</button>
+				</form>
+			</section>
 		</main>
 		<footer>
 			<h1>Scoreboard</h1>

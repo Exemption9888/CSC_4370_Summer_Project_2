@@ -1,4 +1,7 @@
 let gameStart = false;
+let movesMade = 0;
+let timerInterval = null;
+let seconds = 0;
 
 const difficulty = document.getElementById('difficulty');
 const gameTimer = document.getElementById('timer');
@@ -8,10 +11,13 @@ const shuffleButton = document.getElementById('shuffle-button');
 const resetButton = document.getElementById('reset-button');
 const empty = document.querySelector('.empty');
 
+const winScreen = document.getElementById('win-screen');
+const winTime = document.getElementById('time-score');
+const winMoves = document.getElementById('move-score');
+const submissionButton = document.getElementById('submission-button');
+const playerName = document.getElementById('player-name');
+
 let gameDifficulty = difficulty.value;
-let movesMade = 0;
-let timerInterval = null;
-let seconds = 0;
 
 const allTiles = document.querySelectorAll('.tile');
 allTiles.forEach( tile => {
