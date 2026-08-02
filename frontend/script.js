@@ -1,7 +1,5 @@
 let gameStart = false;
 
-const winner = Array.from( gameBoard.children );
-
 const difficulty = document.getElementById('difficulty');
 const gameTimer = document.getElementById('timer');
 const moveCounter = document.getElementById('move-counter');
@@ -9,6 +7,8 @@ const gameBoard = document.getElementById('game-board');
 const shuffleButton = document.getElementById('shuffle-button');
 const resetButton = document.getElementById('reset-button');
 const empty = document.querySelector('.empty');
+
+let gameDifficulty = difficulty.value;
 
 const allTiles = document.querySelectorAll('.tile');
 allTiles.forEach( tile => {
@@ -74,4 +74,27 @@ function resetGame() {
 	gameTimer.innerHTML = 'Timer: 0s';
 }
 
+function shuffle( n ) {
+	const tiles = Array.from( gameBoard.children );
+	for ( let i = 0; i < n; i++ ) {
+		const validMoves = [];
+		tiles.forEach( item => {
+			if ( isValid( item ) ) { validMoves.push( item ); }
+		})
+		const randomIndex = Math.floor( Math.random() * validMoves.length );
+		const randomTile = validMoves[ randomIndex ];
+		const placeholder = document.createElement( 'div' );
+		randomTile.replaceWith( placeholder );
+		empty.replaceWith( randomTile );
+		placeholder.replaceWith( empty );
+	}
+	gameStart = true;
+}
+
 resetButton.addEventListener( 'click', resetGame() );
+
+shuffleButton.addEventListener( 'click', shuffle( gameDifficulty ) );
+
+difficulty.addEventListener( 'change', (event) => {
+	gameDifficulty = difficulty.value;
+})
